@@ -1,7 +1,7 @@
 {
   "config": {
     "lights_out": "23:00",
-    "last_opened": "2025-12-18"
+    "last_opened": "2025-12-21"
   },
   "roster": [
     "Roommate B",
@@ -19,6 +19,11 @@
       "id": 2,
       "date": "2025-12-20",
       "title": "暴打万鑫宇"
+    },
+    {
+      "id": 3,
+      "date": "2025-12-21",
+      "title": "恶心wxy"
     }
   ],
   "shopping": {
