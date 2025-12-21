@@ -1,0 +1,28 @@
+{
+  "config": {
+    "lights_out": "23:00",
+    "last_opened": "2025-12-18"
+  },
+  "roster": [
+    "Roommate B",
+    "Roommate C",
+    "Roommate D",
+    "Roommate A"
+  ],
+  "ddls": [
+    {
+      "id": 1,
+      "date": "2025-12-19",
+      "title": "我我我我"
+    },
+    {
+      "id": 2,
+      "date": "2025-12-20",
+      "title": "暴打万鑫宇"
+    }
+  ],
+  "shopping": {
+    "万鑫宇大人": 1,
+    "王欣涵大人": 1
+  }
+}
