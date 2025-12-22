@@ -20,5 +20,7 @@
       "title": "C.S. Project Presentation"
     }
   ],
-  "shopping": {}
+  "shopping": {
+    "some snacks": 2
+  }
 }
