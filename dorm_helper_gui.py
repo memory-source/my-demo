@@ -304,28 +304,47 @@ class DormHelperGUI:
         messagebox.showinfo("Rotation Successful", f"Rotated to next person: {duty_list[0]}")
 
     def edit_duty_roster(self):
-        # Read current duty personnel
+        # Create a custom popup window (Toplevel)
+        edit_win = tk.Toplevel(self.root)
+        edit_win.title("Edit Duty Personnel")
+        edit_win.geometry("400x350")
+        
+        # Label
+        ttk.Label(edit_win, text="Please enter duty personnel (one per line):", font=("SimHei", 10)).pack(pady=10)
+        
+        # Text input area (Supports multiple lines)
+        text_area = tk.Text(edit_win, width=40, height=10, font=("SimHei", 10))
+        text_area.pack(padx=20, pady=5)
+        
+        # Load current data into the text area
         current_roster = self.dorm_helper.data['roster']
-        current_str = "\n".join(current_roster) if current_roster else "Please enter duty personnel, one per line"
-        # Pop up input box
-        new_str = simpledialog.askstring(
-            "Edit Duty Personnel",
-            "Please enter duty personnel (one per line, order determines rotation):",
-            initialvalue=current_str,
-            parent=self.root
-        )
-        if new_str is None:  # Cancel input
-            return
-        # Process input (remove duplicates, empty lines)
-        new_roster = [name.strip() for name in new_str.split("\n") if name.strip()]
-        if not new_roster:
-            messagebox.showwarning("Input Error", "Duty personnel cannot be empty!")
-            return
-        # Update data
-        self.dorm_helper.data['roster'] = new_roster
-        self.update_duty_tab()
-        self.update_reminder_tab()
-        messagebox.showinfo("Success", "Duty personnel list has been updated!")
+        if current_roster:
+            text_area.insert("1.0", "\n".join(current_roster))
+            
+        # Internal save function
+        def save_roster():
+            # Get text from line 1, char 0 to End
+            content = text_area.get("1.0", tk.END).strip()
+            # Split by newline and remove empty lines
+            new_roster = [name.strip() for name in content.split("\n") if name.strip()]
+            
+            if not new_roster:
+                messagebox.showwarning("Input Error", "Duty personnel cannot be empty!", parent=edit_win)
+                return
+            
+            # Update data
+            self.dorm_helper.data['roster'] = new_roster
+            self.update_duty_tab()
+            self.update_reminder_tab()
+            messagebox.showinfo("Success", "Duty personnel list has been updated!", parent=edit_win)
+            edit_win.destroy()
+
+        # Button area
+        btn_frame = ttk.Frame(edit_win)
+        btn_frame.pack(pady=10)
+        
+        ttk.Button(btn_frame, text="OK", command=save_roster).pack(side="left", padx=10)
+        ttk.Button(btn_frame, text="Cancel", command=edit_win.destroy).pack(side="left", padx=10)
 
     # --------------------------
     # General Functions
