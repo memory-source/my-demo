@@ -15,5 +15,7 @@
       "title": "final version"
     }
   ],
-  "shopping": {}
+  "shopping": {
+    "some snacks": 1
+  }
 }
